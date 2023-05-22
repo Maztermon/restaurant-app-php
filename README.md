@@ -64,3 +64,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Preview : 
+![Homepage](https://github.com/Maztermon/restaurant-app-php/assets/43300766/0b23dbb9-fdb7-4160-bc78-6f965fc66f3f)
+
+## Run : php artisan serve
+## Link : http://127.0.0.1:8000/restaurant
+
+
+
+
+
+
+
