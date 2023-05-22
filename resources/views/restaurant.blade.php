@@ -6,23 +6,10 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <style>
-        /**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
-        /* [START maps_places_autocomplete_Restaurants_search] */
-        /* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
         #map {
             height: 100%;
         }
 
-        /* 
-   * Optional: Makes the sample page fill the window. 
-   */
         html,
         body {
             height: 100%;
@@ -37,7 +24,7 @@
         table {
             font-size: 14px;
         }
-        
+
         .Restaurant-search {
             -webkit-box-align: center;
             -ms-flex-align: center;
@@ -129,14 +116,12 @@
         .iw_table_icon {
             text-align: right;
         }
-
-        /* [END maps_places_autocomplete_Restaurants_search] */
     </style>
 
 </head>
 
 <body>
-   
+
     <div class="Restaurant-search">
         <div id="findRestaurants"> Restaurants in :</div>
 
@@ -180,8 +165,8 @@
             </table>
         </div>
     </div>
-   
-   
+
+
     <script>
         let map;
         let places;
@@ -218,8 +203,7 @@
             infoWindow = new google.maps.InfoWindow({
                 content: document.getElementById("info-content"),
             });
-            // Create the autocomplete object and associate it with the UI input control.
-            // Restrict the search to the default country, and to place type "cities".
+           
             autocomplete = new google.maps.places.Autocomplete(
                 document.getElementById("autocomplete"), {
                     types: ["(cities)"],
@@ -229,14 +213,13 @@
             );
             places = new google.maps.places.PlacesService(map);
             autocomplete.addListener("place_changed", onPlaceChanged);
-            // Add a DOM event listener to react when the user selects a country.
+            
             document
                 .getElementById("country")
                 .addEventListener("change", setAutocompleteCountry);
         }
 
-        // When the user selects a city, get the place details for the city and
-        // zoom the map in on the city.
+       
         function onPlaceChanged() {
             const place = autocomplete.getPlace();
 
@@ -249,7 +232,7 @@
             }
         }
 
-        // Search for Restaurant in the selected city, within the viewport of the map.
+       
         function search() {
             const search = {
                 bounds: map.getBounds(),
@@ -261,21 +244,18 @@
                     clearResults();
                     clearMarkers();
 
-                    // Create a marker for each Restaurant found, and
-                    // assign a letter of the alphabetic to each marker icon.
+                  
                     for (let i = 0; i < results.length; i++) {
                         const markerLetter = String.fromCharCode("A".charCodeAt(0) + (i % 26));
                         const markerIcon = MARKER_PATH + markerLetter + ".png";
 
-                        // Use marker animation to drop the icons incrementally on the map.
+                        
                         markers[i] = new google.maps.Marker({
                             position: results[i].geometry.location,
                             animation: google.maps.Animation.DROP,
                             icon: markerIcon,
                         });
-                        // If the user clicks a Restaurant marker, show the details of that Restaurant
-                        // in an info window.
-                        // @ts-ignore TODO refactor to avoid storing on marker
+                        
                         markers[i].placeResult = results[i];
                         google.maps.event.addListener(markers[i], "click", showInfoWindow);
                         setTimeout(dropMarker(i), i * 100);
@@ -295,8 +275,7 @@
             markers = [];
         }
 
-        // Set the country restriction based on user input.
-        // Also center and zoom the map on the given country.
+       
         function setAutocompleteCountry() {
             const country = document.getElementById("country").value;
 
@@ -363,10 +342,9 @@
             }
         }
 
-        // Get the place details for a Restaurant. Show the information in an info window,
-        // anchored on the marker for the Restaurant that the user selected.
+        
         function showInfoWindow() {
-            // @ts-ignore
+           
             const marker = this;
 
             places.getDetails({
@@ -383,7 +361,7 @@
             );
         }
 
-        // Load the place information into the HTML elements used by the info window.
+        
         function buildIWContent(place) {
             document.getElementById("iw-icon").innerHTML =
                 '<img class="restaurantIcon" ' + 'src="' + place.icon + '"/>';
@@ -398,9 +376,7 @@
                 document.getElementById("iw-phone-row").style.display = "none";
             }
 
-            // Assign a five-star rating to the Restaurant, using a black star ('&#10029;')
-            // to indicate the rating the Restaurant has earned, and a white star ('&#10025;')
-            // for the rating points not achieved.
+            
             if (place.rating) {
                 let ratingHtml = "";
 
@@ -418,8 +394,7 @@
                 document.getElementById("iw-rating-row").style.display = "none";
             }
 
-            // The regexp isolates the first part of the URL (domain plus subdomain)
-            // to give a short URL for displaying in the info window.
+            
             if (place.website) {
                 let fullUrl = place.website;
                 let website = String(hostnameRegexp.exec(place.website));
