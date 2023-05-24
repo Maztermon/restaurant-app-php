@@ -67,7 +67,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Preview : 
 ![Homepage](https://github.com/Maztermon/restaurant-app-php/assets/43300766/0b23dbb9-fdb7-4160-bc78-6f965fc66f3f)
-## How to create .env : GOOGLE_MAP_KEY
+## Run : cp .env.example .env 
+## Add .env : GOOGLE_MAP_KEY=You_Api
 ## Run : php artisan serve
 ## Link : http://127.0.0.1:8000/restaurant
 
